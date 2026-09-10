@@ -57,7 +57,7 @@ def predict(req: Request):
     proba = model.predict_proba([req.text])[0]
     return {
         "text": req.text,
-        "sentiment": "ijobiy" if proba[1] > 0.5 else "salbiy",
+        "sentiment": "positive" if proba[1] > 0.5 else "salbiy",
         "confidence": round(float(max(proba)), 3),
         "latency_ms": round((time.time() - t0) * 1000, 1),
         "version": MODEL_VERSION,
