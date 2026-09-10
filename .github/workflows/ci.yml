@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Testlar
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodni olish
+        uses: actions/checkout@v4
+
+      - name: Python ornatish
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Kutubxonalar
+        run: |
+          pip install --upgrade pip
+          pip install -r app/requirements.txt
+          pip install pytest httpx
+
+      - name: Test modeli
+        run: python tests/make_test_model.py
+
+      - name: Testlar
+        run: pytest tests/ -v

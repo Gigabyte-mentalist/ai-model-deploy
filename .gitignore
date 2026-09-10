@@ -6,3 +6,5 @@ models/
 *.joblib
 *.pkl
 .DS_Store
+tests/test_model.joblib
+.pytest_cache/
